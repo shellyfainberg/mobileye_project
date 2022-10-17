@@ -1,17 +1,16 @@
 .button {
+  width: 75px;
+    height: 25px;
   font: inherit;
   font-size: 12px;
   border: 1px solid #625f63;
   border-radius: 8px;
   padding: 0.25rem 1rem;
   cursor: pointer;
-
-
 }
 
 .button:hover,
 .button:active {
-  /* background: #625f63; */
   border-color: #625f63;
 }
 
@@ -19,9 +18,14 @@
   outline: none;
 }
 .available {
-  background-color: lightseagreen;
+  background-color:#00AB66;
+  color:white
 }
 .not-available {
   background-color: #CCC;
   color: #625f63;
+}
+.history{
+  background-color: aliceblue;
+
 }

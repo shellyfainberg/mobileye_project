@@ -11,25 +11,32 @@ function App() {
 
   const getVehicles = async () => {
     const { data } = await axios("/vehicles/list");
-    console.log("data!!!!!!!!", data);
     setVehicles(data);
   };
   const occupyVehicle = async (vehicleId) => {
     const { ifOccupy } = await axios.post(`/vehicles/${vehicleId}/occupy/`);
-    console.log("occupy Vehicle", ifOccupy);
     getVehicles();
   };
   const releaseVehicle = async (vehicleId) => {
     const { ifORelease } = await axios.post(`/vehicles/${vehicleId}/release/`);
     getVehicles();
-
-    console.log("release Vehicle");
   };
 
   const getHistory = async (plate) => {
     const res = await axios.get(`/vehicles/${plate}/history/`);
     const historyTasks = res.data;
-    alert(JSON.stringify(historyTasks));
+    console.log(historyTasks);
+    const splitedJson = historyTasks.map((task) => {
+      return (
+        <div>
+          <p>{task.user.username}</p>
+          <p>{task.date}</p>
+          <p>{task.action}</p>
+        </div>
+      );
+    });
+    console.log(splitedJson);
+    alert(JSON.stringify(splitedJson));
   };
 
   const renderVehicles = (_vehicles) => {
@@ -60,41 +67,35 @@ function App() {
                       <span>(owned by : {v.owner_username})</span>
                     )}
                   </p>
-                  <Button onClick={() => getHistory(v.license_plate_number)}>
+                  <Button
+                    className="button history"
+                    onClick={() => getHistory(v.license_plate_number)}
+                  >
                     History
                   </Button>
                 </div>
-
-                <p>
-                  <span className="bold-text">manufacturer:</span>
-                  {v.manufacturer}
-                </p>
-                <p>
-                  <span className="bold-text">license plate number:</span>
-                  {v.license_plate_number}
-                </p>
+                <div className="vehicels-details">
+                  <p>
+                    <span className="bold-text">manufacturer:</span>
+                    {v.manufacturer}
+                  </p>
+                  <p>
+                    <span className="bold-text">license plate number:</span>
+                    {v.license_plate_number}
+                  </p>
+                </div>
               </div>
 
               <div className="buttons-wrapper">
-                <div className="occupy-wrapper">
-                  <Button
-                    className={
-                      "button " +
-                      (v.is_available ? "available" : "not-available")
-                    }
-                    onClick={() => occupyVehicle(v.id)}
-                  >
-                    Occupy
-                  </Button>
+                <Button
+                  className={
+                    "button " + (v.is_available ? "available" : "not-available")
+                  }
+                  onClick={() => occupyVehicle(v.id)}
+                >
+                  Occupy
+                </Button>
 
-                  <span
-                    className={
-                      !v.is_available ? "not-available-text" : "text-disable"
-                    }
-                  >
-                    Vehicle is not available
-                  </span>
-                </div>
                 <div className="release-wrapper">
                   <Button
                     className={
