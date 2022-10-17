@@ -19,7 +19,7 @@
   outline: none;
 }
 .available {
-  background-color: rgb(73, 146, 30);
+  background-color: lightseagreen;
 }
 .not-available {
   background-color: #CCC;

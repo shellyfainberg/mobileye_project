@@ -34,11 +34,6 @@ def list(request):
         } for v in Vehicle.objects.all()]
     return JsonResponse(vehicles_list, safe=False)
 
-
-def detail(request, vehicle_id):
-    vehicle = get_object_or_404(Vehicle, pk=vehicle_id)
-    return render(request, 'vehicles/detail.html', {'vehicle': vehicle})
-
 @csrf_exempt
 def occupy(request, vehicle_id):
     user = request.user
@@ -81,7 +76,7 @@ def history(request,license_plate_number):
         .filter(vehicle__license_plate_number = license_plate_number)
         .order_by("-date")
    )
-   
+
    history_tasks_list = [{
     "date": task.date,
     "user": {

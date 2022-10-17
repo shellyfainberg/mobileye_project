@@ -100,8 +100,8 @@ function App() {
                     className={
                       "button " +
                       (!v.is_available && v.is_owned_by_me
-                        ? "available-and-owner"
-                        : "")
+                        ? "available"
+                        : "not-available-and-owner")
                     }
                     onClick={() => releaseVehicle(v.id)}
                   >
