@@ -3,7 +3,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Button from "./UI/Button";
 import Card from "./UI/Card";
-import ReactTooltip from "react-tooltip";
 
 function App() {
   const [vehicles, setVehicles] = useState([]);
