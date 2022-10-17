@@ -1,0 +1,19 @@
+{% if vehicles_list %}
+<ul>
+    {% for vehicle in vehicles_list %}
+    <li>
+        <form method="post">
+        <span>
+            {{ vehicle.license_plate_number }} - {{ vehicle.manufacturer }} - {{ vehicle.is_available }}
+        </span>
+        <a href="/vehicles/{{ vehicle.id }}/occupy">occupy</a>
+        <a href="/vehicles/{{ vehicle.id }}/release">release</a>
+        <button class="button is-danger" name="follow" value="unfollow" >
+        
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>No vehicles are available.</p>
+{% endif %}

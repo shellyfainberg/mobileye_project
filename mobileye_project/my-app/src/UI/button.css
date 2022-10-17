@@ -1,0 +1,27 @@
+.button {
+  font: inherit;
+  font-size: 12px;
+  border: 1px solid #625f63;
+  border-radius: 8px;
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+
+
+}
+
+.button:hover,
+.button:active {
+  /* background: #625f63; */
+  border-color: #625f63;
+}
+
+.button:focus {
+  outline: none;
+}
+.available {
+  background-color: rgb(73, 146, 30);
+}
+.not-available {
+  background-color: #CCC;
+  color: #625f63;
+}
