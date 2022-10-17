@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Button from "./UI/Button";
 import Card from "./UI/Card";
+import ReactTooltip from "react-tooltip";
 
 function App() {
   const [vehicles, setVehicles] = useState([]);
@@ -14,29 +15,28 @@ function App() {
     setVehicles(data);
   };
   const occupyVehicle = async (vehicleId) => {
-    const { ifOccupy } = await axios.post(`/vehicles/${vehicleId}/occupy/`);
+    await axios.post(`/vehicles/${vehicleId}/occupy/`);
     getVehicles();
   };
   const releaseVehicle = async (vehicleId) => {
-    const { ifORelease } = await axios.post(`/vehicles/${vehicleId}/release/`);
+    await axios.post(`/vehicles/${vehicleId}/release/`);
     getVehicles();
   };
 
   const getHistory = async (plate) => {
     const res = await axios.get(`/vehicles/${plate}/history/`);
     const historyTasks = res.data;
-    console.log(historyTasks);
-    const splitedJson = historyTasks.map((task) => {
-      return (
-        <div>
-          <p>{task.user.username}</p>
-          <p>{task.date}</p>
-          <p>{task.action}</p>
-        </div>
-      );
+
+    const historyTasksStr = historyTasks.map((task) => {
+      const prettyDate = new Date(task.date).toLocaleString("en-US", {
+        hour12: false,
+      });
+      return `${task.user.username} ${
+        task.action == "release" ? "released" : "occupied"
+      } vehicle ${plate} on ${prettyDate}`;
     });
-    console.log(splitedJson);
-    alert(JSON.stringify(splitedJson));
+    const msg = historyTasksStr.join("\n");
+    alert(msg);
   };
 
   const renderVehicles = (_vehicles) => {
@@ -123,13 +123,15 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Vehicles list </h2>
+        <h2>Vehicles list</h2>
         <div className="filter-wrapper">
           <input
+            className="search"
             type="text"
             placeholder="Search..."
             onChange={(e) => setFilterText(e.target.value)}
           ></input>
+
           <label>
             <input
               type="checkbox"
