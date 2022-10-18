@@ -12,6 +12,7 @@ function App() {
   const getVehicles = async () => {
     const { data } = await axios("/vehicles/list");
     setVehicles(data);
+    
   };
   const occupyVehicle = async (vehicleId) => {
     await axios.post(`/vehicles/${vehicleId}/occupy/`);
@@ -91,6 +92,8 @@ function App() {
                     "button " + (v.is_available ? "available" : "not-available")
                   }
                   onClick={() => occupyVehicle(v.id)}
+                  
+               
                 >
                   Occupy
                 </Button>

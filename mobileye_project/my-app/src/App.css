@@ -84,6 +84,7 @@ p {
 .search {
   border-radius: 6px;
   border-color:black;
+  margin-bottom: 7px;
   width: 365px;
   height: 23px;
 }
