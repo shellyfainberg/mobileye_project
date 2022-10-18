@@ -1,4 +1,6 @@
 .button {
+  background-color: #00ab66;
+  color: white;
   width: 80px;
   height: 30px;
   font: inherit;
@@ -8,7 +10,9 @@
   border-radius: 8px;
   cursor: pointer;
 }
-
+.button:disabled {
+  background-color: #ccc;
+}
 .button:hover,
 .button:active {
   border-color: #625f63;
@@ -17,14 +21,7 @@
 .button:focus {
   outline: none;
 }
-.available {
-  background-color: #00ab66;
-  color: white;
-}
-.not-available {
-  background-color: #ccc;
-  color: #625f63;
-}
+
 .history {
-  background-color: aliceblue;
+  background-color: rgb(95 ,95 ,218);
 }

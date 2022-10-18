@@ -89,10 +89,10 @@ function App() {
               <div className="buttons-wrapper">
                 <Button
                   className={
-                    "button " + (v.is_available ? "available" : "not-available")
+                    "button " 
                   }
                   onClick={() => occupyVehicle(v.id)}
-                  
+                  disabled={!v.is_available}
                
                 >
                   Occupy
